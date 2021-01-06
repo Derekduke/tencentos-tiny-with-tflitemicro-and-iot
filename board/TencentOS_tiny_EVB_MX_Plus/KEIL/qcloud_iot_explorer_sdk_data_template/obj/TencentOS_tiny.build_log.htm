@@ -1,0 +1,76 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.31.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Yang Qingsheng, HDU, LIC=LSNXV-PCX6P-KP9ZY-ILH3D-3PT1T-TCZ3F
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.31.0.0
+Toolchain Path:  D:\keilv5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.14
+Assembler:       Armasm.exe V6.14
+Linker/Locator:  ArmLink.exe V6.14
+Library Manager: ArmAr.exe V6.14
+Hex Converter:   FromElf.exe V6.14
+CPU DLL:         SARMCM3.DLL V5.31.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.7.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+G:\ESP8266_IOT\TencentOS-tiny\board\TencentOS_tiny_EVB_MX_Plus\KEIL\qcloud_iot_explorer_sdk_data_template\TencentOS_tiny.uvprojx
+Project File Date:  01/02/2021
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.14', folder: 'D:\keilv5\ARM\ARMCLANG\Bin'
+Build target 'TencentOS_tiny'
+../../../../examples/qcloud_iot_explorer_sdk_data_template/data_template_sample.c(305): warning: implicit declaration of function 'OLED_ShowString' is invalid in C99 [-Wimplicit-function-declaration]
+    OLED_ShowString(0, 0, (uint8_t *)color, 8);
+    ^
+../../../../examples/qcloud_iot_explorer_sdk_data_template/data_template_sample.c(317): warning: implicit declaration of function 'OLED_ShowString' is invalid in C99 [-Wimplicit-function-declaration]
+    OLED_ShowString(0, 2, (uint8_t *)brightness_str, 8);
+    ^
+../../../../examples/qcloud_iot_explorer_sdk_data_template/data_template_sample.c(323): warning: implicit declaration of function 'OLED_Clear' is invalid in C99 [-Wimplicit-function-declaration]
+    OLED_Clear();
+    ^
+../../../../examples/qcloud_iot_explorer_sdk_data_template/data_template_sample.c(330): warning: implicit declaration of function 'OLED_Clear' is invalid in C99 [-Wimplicit-function-declaration]
+    OLED_Clear();
+    ^
+../../../../examples/qcloud_iot_explorer_sdk_data_template/data_template_sample.c(331): warning: implicit declaration of function 'OLED_ShowString' is invalid in C99 [-Wimplicit-function-declaration]
+    OLED_ShowString(0, 0, (uint8_t *)info, 16);
+    ^
+5 warnings generated.
+compiling data_template_sample.c...
+linking...
+Program Size: Code=131216 RO-data=20292 RW-data=528 ZI-data=61048  
+FromELF: creating hex file...
+".\obj\TencentOS_tiny.axf" - 0 Error(s), 5 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.7.0.pack
+                ARM.CMSIS.5.7.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.4.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32L4xx_DFP.2.4.0.pack
+                Keil.STM32L4xx_DFP.2.4.0
+                STMicroelectronics STM32L4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_TencentOS_tiny
+  D:\keilv5\ARM\ARM\CMSIS\5.7.0\CMSIS\Core\Include
+  D:\keilv5\ARM\Keil\STM32L4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.4.0
+Build Time Elapsed:  00:00:06
+</pre>
+</body>
+</html>
