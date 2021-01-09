@@ -19,6 +19,7 @@ int main(void)
    board_init();
    printf("Welcome to TencentOS tiny\r\n");
 	 person_detect_init();
+	 printf("hello\n");
    osKernelInitialize(); // TOS Tiny kernel initialize
    osThreadCreate(osThread(application_entry), NULL); // Create TOS Tiny task
    osKernelStart(); // Start TOS Tiny

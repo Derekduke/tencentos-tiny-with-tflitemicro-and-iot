@@ -35,20 +35,20 @@ void board_init(void)
 {
   HAL_Init();
   SystemClock_Config();
-  //MX_GPIO_Init();
-  //MX_DMA_Init();
+  MX_GPIO_Init();
+  MX_DMA_Init();
   MX_LPUART1_UART_Init();
-	//MX_USART1_UART_Init();
+	MX_USART1_UART_Init();
 	MX_USART2_UART_Init();
-  //MX_DCMI_Init();
-  //MX_I2C1_Init();
-  //MX_SPI1_Init();
-  //MX_TIM4_Init();
+  MX_DCMI_Init();
+  MX_I2C1_Init();
+  MX_SPI1_Init();
+  MX_TIM4_Init();
 	
-	//LCD_2IN4_Init();
-	//OV2640_Init();
-	//OV2640_RGB565_Mode();
-	//OV2640_OutSize_Set(OV2640_PIXEL_WIDTH,OV2640_PIXEL_HEIGHT);
+	LCD_2IN4_Init();
+	OV2640_Init();
+	OV2640_RGB565_Mode();
+	OV2640_OutSize_Set(OV2640_PIXEL_WIDTH,OV2640_PIXEL_HEIGHT);
 	
 	__HAL_DCMI_DISABLE_IT(&hdcmi, DCMI_IT_LINE | DCMI_IT_VSYNC);
 	if (HAL_DCMI_Start_DMA(&hdcmi, DCMI_MODE_CONTINUOUS,  (uint32_t)camera_buffer , (OV2640_PIXEL_WIDTH*OV2640_PIXEL_HEIGHT)/2))
