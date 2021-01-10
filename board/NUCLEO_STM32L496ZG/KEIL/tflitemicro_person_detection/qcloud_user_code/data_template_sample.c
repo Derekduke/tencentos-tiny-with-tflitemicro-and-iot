@@ -19,17 +19,23 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
-#define EVENT_POST_ENABLED
 
 #include "qcloud_iot_export.h"
 #include "qcloud_iot_import.h"
 #include "lite-utils.h"
 #include "data_config.c"
 
+#include "cmsis_os.h"
+#include "mcu_init.h"
+
 #ifdef AUTH_MODE_CERT
     static char sg_cert_file[PATH_MAX + 1];      // full path of device cert file
     static char sg_key_file[PATH_MAX + 1];       // full path of device key file
 #endif
+
+extern int person_flag;
+extern int dagerous_flag;
+extern int person_count;
 
 static DeviceInfo sg_devInfo;
 static MQTTEventType sg_subscribe_event_result = MQTT_EVENT_UNDEF;
@@ -337,34 +343,29 @@ static void light_power_off(void)
 // you should add your logic how to use pData
 void deal_down_stream_user_logic(void *client, ProductDataDefine   * pData)
 {
+		//处理下发逻辑
     Log_d("someting about your own product logic wait to be done");
 
 /////////////////////////////////////////////////////////////////////////////////////
-    char *color_name;
+//    char *person_decection;
+		
+    /* 检测状态 */
+//    switch (person_flag) {
+//        case 0:
+//            sg_ProductData.m_person = 0;
+//            break;
 
-    /* 灯光颜色 */
-    switch (sg_ProductData.m_color) {
-        case 0:
-            color_name = " RED ";
-            break;
+//        case 1:
+//            sg_ProductData.m_person = 1;
+//            break;
+//    }
 
-        case 1:
-            color_name = "GREEN";
-            break;
-
-        case 2:
-            color_name = "BLUE";
-            break;
-    }
-
-    if (sg_ProductData.m_power_switch == 1) {
-        /* 灯光开启式，按照控制参数展示 */
-        light_power_on();
-        light_change_color(color_name);
-        light_change_brightness(sg_ProductData.m_brightness);
+    if (sg_ProductData.m_warning == 1) {
+			/* 开警示 */
+			HAL_GPIO_WritePin(GPIOB, LED_Pin, GPIO_PIN_SET);
     } else {
-        /* 灯光关闭展示 */
-        light_power_off();
+			/* 关警示 */
+			HAL_GPIO_WritePin(GPIOB, LED_Pin, GPIO_PIN_RESET);
     }
 }
 
@@ -386,11 +387,35 @@ void first_time_report_construct(DeviceProperty *pReportDataList[], int *pCount)
 int deal_up_stream_user_logic(DeviceProperty *pReportDataList[], int *pCount)
 {
     int i, j;
+		static  int person_count_last, person_flag_last, dagerous_flag_last = 0;
+		
+	//上传数据逻辑处理
+		if(person_count != person_count_last || person_flag != person_flag_last){
+			
+			sg_DataTemplate[0].state = eCHANGED;
+			sg_DataTemplate[3].state = eCHANGED;
+			
+			sg_ProductData.m_count = person_count;
+			sg_ProductData.m_person = person_flag;
+			
+			person_count_last = person_count;  
+			person_flag_last = person_flag;
+			
+		}
 
+
+		if(dagerous_flag != dagerous_flag_last)
+		{
+			sg_DataTemplate[1].state = eCHANGED;
+			sg_ProductData.m_dagerous = dagerous_flag;
+			dagerous_flag_last = dagerous_flag;
+		}
+    
+		
     for (i = 0, j = 0; i < TOTAL_PROPERTY_COUNT; i++) {
         if(eCHANGED == sg_DataTemplate[i].state) {
             pReportDataList[j++] = &(sg_DataTemplate[i].data_property);
-	    sg_DataTemplate[i].state = eNOCHANGE;
+						sg_DataTemplate[i].state = eNOCHANGE;
         }
     }
     *pCount = j;

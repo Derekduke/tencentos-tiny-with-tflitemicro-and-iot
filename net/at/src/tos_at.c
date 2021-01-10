@@ -292,7 +292,9 @@ __STATIC__ void at_parser(void *arg)
     at_event_t *at_event = K_NULL;
     at_cache_t *recv_cache = K_NULL;
     at_parse_status_t at_parse_status;
-		printf("at_parser\n");
+	
+		recv_cache = &AT_AGENT->recv_cache;
+		
     while (K_TRUE) {
 		
         at_parse_status = at_uart_line_parse();
@@ -327,9 +329,9 @@ __STATIC__ void at_parser(void *arg)
 
         if (at_echo->buffer) {
             at_echo_buffer_copy(recv_cache, at_echo);
-        }
-
-        tos_kprintln("--->%s", recv_cache->buffer);
+        } 
+				printf("--->%s\r\n", recv_cache->buffer);
+        //tos_kprintln("--->%s", recv_cache->buffer);
     }
 }
 

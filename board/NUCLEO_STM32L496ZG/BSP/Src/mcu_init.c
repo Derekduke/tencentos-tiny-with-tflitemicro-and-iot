@@ -9,11 +9,15 @@ extern DCMI_HandleTypeDef hdcmi;
 
 int fputc(int ch, FILE *f)
 {
-  if (ch == '\n') {
-    HAL_UART_Transmit(&hlpuart1, (void *)"\r", 1,30000);
-  }
-  HAL_UART_Transmit(&hlpuart1, (uint8_t *)&ch, 1, 0xFFFF);
+	while ((LPUART1->ISR & 0X40) == 0);
+  LPUART1->TDR = (uint8_t)ch;
   return ch;
+	
+//  if (ch == '\n') {
+//    HAL_UART_Transmit(&hlpuart1, (void *)"\r", 1,30000);
+//  }
+//  HAL_UART_Transmit(&hlpuart1, (uint8_t *)&ch, 1, 0xFFFF);
+//  return ch;
 }
 
 int _write(int fd, char *ptr, int len)

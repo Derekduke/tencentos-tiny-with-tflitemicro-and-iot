@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "tos_k.h"
 #include "tos_at.h"
+#include "stm32l4xx_hal_uart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -284,8 +285,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     extern uint8_t data;
     if (huart->Instance == USART2) {
         HAL_UART_Receive_IT(&huart2, &data, 1);
+				//printf("%c",data);
         tos_at_uart_input_byte(data);
     }
 }
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
+    {
+      if (HAL_UART_GetError(huart) & HAL_UART_ERROR_ORE)
+        __HAL_UART_FLUSH_DRREGISTER(huart);
+    }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

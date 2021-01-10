@@ -353,10 +353,10 @@ static int esp8266_init(void)
 {
     printf("Init ESP8266 ...\n" );
 
-    if (esp8266_restore() != 0) {
-        printf("esp8266 restore FAILED\n");
-        return -1;
-    }
+//    if (esp8266_restore() != 0) {
+//        printf("esp8266 restore FAILED\n");
+//        return -1;
+//    }
 
     if (esp8266_echo_close() != 0) {
         printf("esp8266 echo close FAILED\n");
