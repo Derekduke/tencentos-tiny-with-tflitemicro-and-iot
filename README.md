@@ -1,5 +1,3 @@
-本文章为团队原创，如果有转载请在文章头部注明出处以及本原文链接，谢谢合作！
-
 # 一、概述
 
 大家好，很高兴能够参与这次腾讯云IoT应用创新大赛，非常希望能够在这次比赛中得到收获与提升，同时也希望能够通过这次比赛能与各位交流学习。
@@ -12,7 +10,7 @@
 
 **2.本系统搭载了Tensorflow Lite Micro的超低功耗深度学习AI推理框架。** Tensorflow Lite Micro是tensorflow框架针对微控制器应用场景所专门设计的深度学习推理框架，它占用的资源少，运行时内存最低只需要16KB，同时其兼容tensorflow框架，依托于Tensorflow平台强大的生态背景，使得更多开发者可以方便的集成、使用AI算法，为端侧带来人工智能的新活力。
 
-_**目前由我们团队制作的**_[_**Tensorflow Lite Micro组件**_](https://github.com/Tencent/TencentOS-tiny/tree/master/components/ai/tflite_micro)_**已经进入Tencent OS-tiny主仓库，其中提供的了Tensorflow Lite Micro的全部源码以及针对ARM Cortex M系列的MDK lib库文件，可以方便的集成到MCU开发环境中。同时在本文中关于**_[_**行人检测的教程文档**_](https://github.com/Tencent/TencentOS-tiny/blob/master/board/NUCLEO_STM32L496ZG/KEIL/tflitemicro_person_detection/TFlite_Micro_Demo%2525252525E7%2525252525A7%2525252525BB%2525252525E6%2525252525A4%25252525258D%2525252525E5%25252525258F%252525252582%2525252525E8%252525252580%252525252583%2525252525E6%25252525258C%252525252587%2525252525E5%25252525258D%252525252597%2525252525EF%2525252525BC%252525252588Keil%2525252525E7%252525252589%252525252588%2525252525EF%2525252525BC%252525252589.md)_**也同步开源到了Tencent OS-tiny官方仓库，开发者可以同步复现我们之前的工作，同时也可以基于这一开发文档来实现自己的AI应用。**_
+_**目前由我们团队制作的**_[_**Tensorflow Lite Micro组件**_](https://github.com/Tencent/TencentOS-tiny/tree/master/components/ai/tflite_micro)_**已经进入Tencent OS-tiny主仓库，其中提供的了Tensorflow Lite Micro的全部源码以及针对ARM Cortex M系列的MDK lib库文件，可以方便的集成到MCU开发环境中。**
 
 **3.本系统将边缘AI和tencentos-tiny结合在一起，面向区域安防管理，提出了一种新的端云系统架构**。通过对这种机制的验证并且配合详细的用户移植文档，让整个系统具备在多领域多场景的可迁移性与易用性。
 
@@ -268,13 +266,13 @@ void deal_down_stream_user_logic(void *client, ProductDataDefine   * pData)
 
 设备端上传的只读数据：
 
-- **行人检测：**设备端检测到行人时，标志位置为1；
-- **异常停留报警：**当设备端持续检测到行人时，触发异常停留报警，标志位置为1；
-- **行人计数：**当设备端的行人检测结果从无人变化到有人时，人流量计数值+1
+- **行人检测** ：设备端检测到行人时，标志位置为1；
+- **异常停留报警** ：当设备端持续检测到行人时，触发异常停留报警，标志位置为1；
+- **行人计数** ：当设备端的行人检测结果从无人变化到有人时，人流量计数值+1
 
 设备端接收的控制指令：
 
-- **报警提示：**当用户看到有异常停留，可以控制设备端发出报警提示，也可以关闭报警提示。
+- **报警提示** ：当用户看到有异常停留，可以控制设备端发出报警提示，也可以关闭报警提示。
 
 ![数据模板](./image/2_数据模板.png)
 
